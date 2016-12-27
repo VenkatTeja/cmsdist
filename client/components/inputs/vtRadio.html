@@ -1,0 +1,11 @@
+<md-radio-group ng-model="$ctrl.object[$ctrl.model]" ng-if="!$ctrl.diffValue">
+
+  <md-radio-button ng-value="option" ng-repeat="option in $ctrl.options track by $index" class="thumbs_wrap" style="padding-right:10px">{{option}}</md-radio-button>
+
+</md-radio-group>
+
+<md-radio-group ng-model="$ctrl.object[$ctrl.model]" ng-if="$ctrl.diffValue">
+
+  <md-radio-button ng-value="option.value" ng-repeat="option in $ctrl.options track by $index" class="thumbs_wrap" style="padding-right:10px">{{option.name}}</md-radio-button>
+
+</md-radio-group>

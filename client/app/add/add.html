@@ -1,0 +1,186 @@
+<div class="fullW thumbs_wrap">
+  <div id="hidden"></div>
+  <br/>
+	<div class="col-md-2"></div>
+	<div class="col-md-8 bgw padding10 box_shadow_dwn borderLt">
+	    <md-tabs md-dynamic-height md-border-bottom md-stretch-tabs="always">
+	      <md-tab label="Customer Entry">
+	        <md-content class="md-padding">
+	          <form name="addCustomer" ng-submit="vm.add('customers', addCustomer)">
+	          	<div ng-include="'addCustomer.html'"></div>
+	          	<md-button class="md-raised md-primary" ng-disabled="addCustomer.$invalid" type="submit">
+                Add
+                <md-progress-circular class="md-warn md-hue-3 floatL" md-diameter="15px" style="margin:10px" ng-show="vm.loading"></md-progress-circular>
+              </md-button>
+			  </form>
+	        </md-content>
+	      </md-tab>
+	      <md-tab label="Farmer Entry">
+	        <md-content class="md-padding">
+	          <form name="addFarmer" ng-submit="vm.add('farmers', addFarmer)">
+	          	<div ng-include="'addFarmer.html'"></div>
+	          	<md-button class="md-raised md-primary" type="submit" ng-disabled="addFarmer.$invalid">
+                Add
+                <md-progress-circular class="md-warn md-hue-3 floatL" md-diameter="15px" style="margin:10px" ng-show="vm.loading"></md-progress-circular>
+              </md-button>
+			  </form>
+	        </md-content>
+	      </md-tab>
+	      <md-tab label="Edit Customer">
+	        <md-content class="md-padding">
+	          <form name="editCustomer" ng-submit="vm.edit(vm.eCustomerObj, 'customers')">
+	          	<div ng-include="'editCustomer.html'"></div>
+	          	<md-button class="md-raised md-primary" type="submit" ng-disabled="editCustomer.$invalid">
+                Save
+                <md-progress-circular class="md-warn md-hue-3 floatL" md-diameter="15px" style="margin:10px" ng-show="vm.loading"></md-progress-circular>
+              </md-button>
+			  </form>
+	        </md-content>
+	      </md-tab>
+	      <md-tab label="Edit Farmer">
+	        <md-content class="md-padding">
+	          <form name="editFarmer" ng-submit="vm.edit(vm.eFarmerObj, 'farmers')">
+	          	<div ng-include="'editFarmer.html'"></div>
+	          	<md-button class="md-raised md-primary" type="submit" ng-disabled="editFarmer.$invalid">
+                Save
+                <md-progress-circular class="md-warn md-hue-3 floatL" md-diameter="15px" style="margin:10px" ng-show="vm.loading"></md-progress-circular>
+              </md-button>
+			  </form>
+	        </md-content>
+	      </md-tab>
+	    </md-tabs>
+	</div>
+</div>
+
+<script type="text/ng-template" id="addCustomer.html">
+	<md-input-container class="md-icon-float md-block">
+      	<label>Customer Unique Code</label>
+      	<input ng-model="vm.user.userCode" type="text" name="userCode" required>
+      	<div ng-messages="addFarmer.userCode.$error">
+			<div ng-message="required">This is required.</div>
+		</div>
+    </md-input-container>
+
+	<md-input-container class="md-icon-float md-block">
+      	<label>Name</label>
+      	<input ng-model="vm.user.name" name="name" type="text" required>
+      	<div ng-messages="addFarmer.name.$error">
+			<div ng-message="required">This is required.</div>
+		</div>
+    </md-input-container>
+
+    <md-input-container class="md-block">
+      <input ng-model="vm.user.phone" type="text" placeholder="Phone Number">
+    </md-input-container>
+
+    <!-- <md-input-container class="md-block">
+      <input ng-model="vm.user.email" type="email" placeholder="Email (required)" ng-required="true">
+    </md-input-container> -->
+
+    <md-input-container class="md-block">
+      <input ng-model="vm.user.address" type="text" placeholder="Address" >
+    </md-input-container>
+</script>
+<script type="text/ng-template" id="addFarmer.html">
+	<md-input-container class="md-icon-float md-block">
+      	<label>Farmer Unique Code</label>
+      	<input ng-model="vm.user.userCode" type="text" name="userCode" required>
+      	<div ng-messages="addFarmer.userCode.$error">
+			<div ng-message="required">This is required.</div>
+		</div>
+    </md-input-container>
+
+	<md-input-container class="md-icon-float md-block">
+      	<label>Name</label>
+      	<input ng-model="vm.user.name" name="name" type="text" required>
+      	<div ng-messages="addFarmer.name.$error">
+			<div ng-message="required">This is required.</div>
+		</div>
+    </md-input-container>
+
+    <md-input-container class="md-block">
+      <input ng-model="vm.user.phone" type="text" placeholder="Phone Number">
+    </md-input-container>
+
+    <!-- <md-input-container class="md-block">
+      <input ng-model="vm.user.email" type="email" placeholder="Email (required)" ng-required="true">
+    </md-input-container> -->
+
+    <md-input-container class="md-block">
+      <input ng-model="vm.user.address" type="text" placeholder="Address" >
+    </md-input-container>
+</script>
+<script type="text/ng-template" id="editCustomer.html">
+	<md-autocomplete
+          md-no-cache="true"
+          md-selected-item="vm.eCustomerObj"
+          md-search-text="vm.searchText"
+          md-items="item in vm.querySearch(vm.searchText, 'customers')"
+          md-item-text="item.userCode"
+          md-min-length="0" 
+          placeholder="Enter Customer Code">
+        <md-item-template>
+          <span md-highlight-text="vm.searchText" md-highlight-flags="^i">{{item.name}}</span>
+        </md-item-template>
+        <md-not-found>
+          No Match Found.
+        </md-not-found>
+    </md-autocomplete>
+	<br/>
+	<md-input-container class="md-icon-float md-block">
+      	<label>Name</label>
+      	<input ng-model="vm.eCustomerObj.name" name="name" type="text" required>
+      	<div ng-messages="addFarmer.name.$error">
+			<div ng-message="required">This is required.</div>
+		</div>
+    </md-input-container>
+
+    <md-input-container class="md-block">
+      <input ng-model="vm.eCustomerObj.phone" type="text" placeholder="Phone Number">
+    </md-input-container>
+
+    <!-- <md-input-container class="md-block">
+      <input ng-model="vm.eCustomerObj.email" type="email" placeholder="Email (required)" ng-required="true">
+    </md-input-container> -->
+
+    <md-input-container class="md-block">
+      <input ng-model="vm.eCustomerObj.address" type="text" placeholder="Address" >
+    </md-input-container>
+</script>
+<script type="text/ng-template" id="editFarmer.html">
+	<md-autocomplete
+          md-no-cache="true"
+          md-selected-item="vm.eFarmerObj"
+          md-search-text="vm.searchText"
+          md-items="item in vm.querySearch(vm.searchText, 'farmers')"
+          md-item-text="item.userCode"
+          md-min-length="0" 
+          placeholder="Enter Farmer Code">
+        <md-item-template>
+          <span md-highlight-text="vm.searchText" md-highlight-flags="^i">{{item.name}}</span>
+        </md-item-template>
+        <md-not-found>
+          No Match Found.
+        </md-not-found>
+    </md-autocomplete>
+    <br/>
+	<md-input-container class="md-icon-float md-block">
+      	<label>Name</label>
+      	<input ng-model="vm.eFarmerObj.name" name="name" type="text" required>
+      	<div ng-messages="addFarmer.name.$error">
+			<div ng-message="required">This is required.</div>
+		</div>
+    </md-input-container>
+
+    <md-input-container class="md-block">
+      <input ng-model="vm.eFarmerObj.phone" type="text" placeholder="Phone Number">
+    </md-input-container>
+
+    <!-- <md-input-container class="md-block">
+      <input ng-model="vm.eFarmerObj.email" type="email" placeholder="Email (required)" ng-required="true">
+    </md-input-container> -->
+
+    <md-input-container class="md-block">
+      <input ng-model="vm.eFarmerObj.address" type="text" placeholder="Address" >
+    </md-input-container>
+</script>

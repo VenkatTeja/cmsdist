@@ -1,0 +1,69 @@
+<header class="bgdb" id="banner" style="min-height:400px;margin-bottom:-300px">
+</header>
+<div class="fullW thumbs_wrap">
+  <div class="col-md-1"></div>
+  <div class="col-md-10 bgw thumbs_wrap borderLt box_shadow_dwn padding10" style="min-width:1000px">
+    <h4 class="centric">Add/Edit Stock Inventory</h4>
+    <md-datepicker ng-model="vm.stockDate" md-placeholder="Select a Date"></md-datepicker>
+    <br/>
+    <form name="stockForm" id="stockForm">
+      <div class="fullW thumbs_wrap centric">
+        <span class="col-xs-2">Farmers</span>
+        <span class="col-xs-2">Items</span>
+        <span class="col-xs-1">Bags</span>
+        <span class="col-xs-2">Purchase Value</span>
+        <span class="col-xs-2">Purchase Value</span>
+        <span class="col-xs-2">Net</span>
+        <span class="col-xs-1">Trays?</span>
+      </div>
+      <div class="fullW thumbs_wrap" ng-repeat="row in vm.rows" style="height:60px">
+        <md-autocomplete
+          md-no-cache="true"
+          md-selected-item="vm.rows[$index].farmer"
+          md-search-text="vm.rows[$index].searchText"
+          md-items="item in vm.querySearch(vm.rows[$index].searchText, 'farmers')"
+          md-item-text="item.name"
+          md-min-length="0" 
+          placeholder="" class="col-xs-2">
+          <md-item-template>
+            <span md-highlight-text="vm.rows[$index].searchText" md-highlight-flags="^i">{{item.name}}</span>
+          </md-item-template>
+          <md-not-found>
+            No Match Found.
+          </md-not-found>
+      </md-autocomplete>
+       <md-autocomplete
+          md-no-cache="true"
+          md-selected-item="vm.rows[$index].item"
+          md-search-text="vm.searchText"
+          md-items="item in vm.querySearch(vm.searchText, 'items')"
+          md-item-text="item.name"
+          md-min-length="0" 
+          placeholder="" class="col-xs-2">
+          <md-item-template>
+            <span md-highlight-text="vm.searchText" md-highlight-flags="^i">{{item.name}}</span>
+          </md-item-template>
+          <md-not-found>
+            No Match Found.
+          </md-not-found>
+      </md-autocomplete>
+      <vt-input form="stockForm[$index]" object="vm.rows[$index]" model="bags" class="col-xs-1"></vt-input>
+      <vt-input form="stockForm[$index]" object="vm.rows[$index]" model="pValue" class="col-xs-2"></vt-input>
+      <vt-input form="stockForm[$index]" object="vm.rows[$index]" model="sValue" class="col-xs-2"></vt-input>
+      <vt-input form="stockForm[$index]" object="vm.rows[$index]" model="net" class="col-xs-2"></vt-input>
+      <md-checkbox ng-model="vm.rows[$index].hasTrays" aria-label="Has Trays"></md-checkbox>
+  </div>
+</div> 
+
+<!-- <div class="container">
+
+  <form class="thing-form">
+    <label>Syncs in realtime across clients</label>
+    <p class="input-group">
+      <input type="text" class="form-control" placeholder="Add a new thing here." ng-model="$ctrl.newThing">
+      <span class="input-group-btn">
+        <button type="submit" class="btn btn-primary" ng-click="$ctrl.addThing()">Add New</button>
+      </span>
+    </p>
+  </form>
+</div> -->

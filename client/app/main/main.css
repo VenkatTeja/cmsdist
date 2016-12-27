@@ -1,0 +1,15 @@
+#stockForm input{
+  border: 1px solid #ddd;
+  padding: 10px;
+  height: 40px;
+}
+#stockForm md-input-container{
+  margin: 0px;
+  padding: 0px
+}
+#stockForm label{
+  margin: 0px;
+}
+#stockForm md-checkbox{
+  margin: 9px 0px 9px 10px;
+}

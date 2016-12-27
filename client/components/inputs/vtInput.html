@@ -1,0 +1,9 @@
+
+<md-input-container class="fullW thumbs_wrap">
+	<label>{{$ctrl.label}}</label>
+	<input ng-required="$ctrl.required" name="{{$ctrl.model}}" ng-model="$ctrl.object[$ctrl.model]" pattern="{{$ctrl.pattern}}" min="{{$ctrl.min}}">
+	<div ng-messages="$ctrl.form[$ctrl.model].$error">
+		<div ng-message="required">This is required.</div>
+		<div ng-message="pattern">Please type according to the pattern.</div>
+	</div>
+</md-input-container>

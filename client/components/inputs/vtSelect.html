@@ -1,0 +1,12 @@
+<md-input-container class="fullW thumbs_wrap">
+	<label>{{$ctrl.label}}</label>
+	<md-select ng-model="$ctrl.object[$ctrl.model]" required name="{{$ctrl.model}}" ng-if="!$ctrl.diffValue">
+		<md-option ng-value="option" ng-repeat="option in $ctrl.options track by $index">{{option}}</md-option>
+	</md-select>
+	<md-select ng-model="$ctrl.object[$ctrl.model]" required name="{{$ctrl.model}}" ng-if="$ctrl.diffValue">
+		<md-option ng-value="option.value" ng-repeat="option in $ctrl.options track by $index">{{option.name}}</md-option>
+	</md-select>
+	<div ng-messages="$ctrl.form[$ctrl.model].$error">
+		<div ng-message="required">This is required.</div>
+	</div>
+</md-input-container>
